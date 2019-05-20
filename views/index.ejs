@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title> Todo List </title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- <script>
+        $(document).ready(function () {
+            $(".outer").mouseover(function () {
+                $('body').append("<h6>MOUSEOVER<h6>");
+            }).mouseenter(function () {
+                $('body').append("<h6>MOUSEENTER<h6>");
+            });
+
+        });
+    </script> -->
+</head>
+
+<body>
+    <div class="container">
+        <h2> Schedule Note </h2>
+        <form action="/addtask" method="POST">
+            <fieldset style="width:230">
+                <legend>새로운 스케쥴</legend>
+                <input type="text" name="title" placeholder="제목"><br>
+                <input type="radio" name="star" value="☆" checked>☆
+                <input type="radio" name="star" value="☆☆">☆☆
+                <input type="radio" name="star" value="☆☆☆">☆☆☆<br>
+                <textarea name="description" placeholder="내용" cols="30" rows="3" maxlength="100"></textarea><br><br>
+                <button> 추가 </button> <input type="date" id="deadline" name="deadline"> 마감
+            </fieldset>
+
+            <h2> Todo List </h2>
+            <button formaction="/doneTask" type="submit"> 완료 </button>
+            <button formaction="/removeTask" type="submit"> 삭제 </button><br>
+            <% for( var i = 0; i < task.length; i++){ %>
+            <li>
+                <fieldset style="width:500">
+                    <legend>Todo</legend>
+                    <input type="checkbox" name="check" value="<%= task[i].id %>" />
+                    제목 : <%= task[i].title %> 마감 : <%= task[i].date %> <%= task[i].star %>
+                    <button formaction="/updateTask" name="update" type="submit" value="<%= task[i].id %>"> 수정
+                    </button>
+                </fieldset>
+            </li>
+            <% } %><br>
+
+            <h2> Done </h2>
+            <% for(var i = 0; i < done.length; i++){ %>
+            <li>
+                <fieldset style="width:500">
+                    <legend>Done</legend>
+                    <input type="checkbox" checked>
+                    제목 : <%= done[i].title %> 마감 : <%= done[i].date %> <%= done[i].star %><br>
+                </fieldset>
+            </li>
+            <% } %>
+        </form>
+    </div>
+</body>
+
+</html>
